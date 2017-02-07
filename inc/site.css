@@ -1,0 +1,82 @@
+body	{
+	margin: 0; padding: 0;
+}
+
+body div	{
+	font-family:arial; font-size:14px; 
+}
+
+.logo	{
+	cursor:pointer;
+}
+
+.page-title	{
+	font-size:48px; color:#8CC63E; margin:20px; line-height:1.5;
+}
+
+.page-title-sub	{
+	font-size:26px;
+}
+
+.para	{
+	font-size:16px; line-height:1.6;
+}
+
+.code	{
+	width:100%; background:#FFE; text-align:left; padding:20px;
+	border-top:1px solid #CCC; border-bottom:1px solid #CCC;
+}
+
+.section-title	{
+	font-size:24px; color:#666666; margin:20px
+}
+
+.site-side-panel	{
+	position:fixed; top:0px;
+	display1:table-cell; width:250px; height: 100%; background:#8CC63E;
+}
+
+.prompt	{
+	font-size:16px; color: #666666;
+}
+
+.input	{
+	font-size:16px; color: #666666;
+}
+
+.side-link	{
+	margin:5px; padding:5px; font-weight1:bold; font-size:18px; text-decoration1: underline; cursor:pointer; color:#FFF;
+	border-bottom:1px solid #ACE65E;
+}
+
+.svgup-icon-wrapper	{
+	display:inline-block; width: 100px; height:100px;
+}
+
+.svgup-icon-wrapper-large	{
+	display:inline-block; width: 120px; height:120px;
+}
+
+.svgup-icon-fisheye	{
+	display:inline-block; width: 40px; height:30px; display:table-cell; vertical-align: bottom;
+}
+
+svg	* {
+	transition: all 0.5s;
+}
+
+@-webkit-keyframes rotate {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to { 
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+svg1 #Layer1	{
+    -webkit-animation-name:             rotate;
+    -webkit-animation-duration:         1.5s;
+    -webkit-animation-iteration-count:  infinite;
+    -webkit-animation-timing-function:  linear;	
+}

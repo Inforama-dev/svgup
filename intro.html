@@ -1,0 +1,257 @@
+<HTML>
+
+	<head>	
+		<base href="."/>
+		<link rel="stylesheet" type="text/css" href="inc/site.css" />	
+		<script type="text/javascript" src="lib/jquery.min.js"></script>
+		<script type="text/javascript" src="lib/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="inc/site.js"></script>
+		<script type="text/javascript" src="SVG-Up.js"></script>
+		<script type="text/javascript" src="images/site-bundle.js"></script>
+		<script type="text/javascript" src="demos/intro/svgup-intro-bundle-basic.js"></script>
+		<script type="text/javascript" src="demos/intro/svgup-intro-bundle-classes.js"></script>
+		<script type="text/javascript" src="demos/intro/svgup-intro-bundle-layers.js"></script>
+	</head>
+	<body>
+	
+		<div style='display: table; height:100%; width:100%'>
+			<div style='width:250px; height:100%; display:table-cell'>
+				<div class='site-side-panel'></div>
+			</div>
+			<div style='display:table-cell; width1:calc:(100% - 250px); text-align:center; vertical-align: top'>
+				<center>
+					<div class='page-title'>Introduction to SVG Up</div>
+					<div class='page-title-sub'>Create a basic bundle</div>
+					
+					<div class='para' style='margin:10px 50px 0px 50px'>
+					Getting started with SVG Up is really easy. Simply grab some SVG images like those below and place them into an image directory.					
+					</div>
+					<br><br>
+					<div>
+						<div style='display:inline-block'><img style='width:50px' src='./images/samples/bell.svg'/></div>
+						<div style='display:inline-block'><img style='width:50px' src='./images/samples/pumpkin.svg'/></div>
+						<div style='display:inline-block'><img style='width:50px' src='./images/samples/cogs.svg'/></div>
+						<div style='display:inline-block'><img style='width:50px' src='./images/samples/fish.svg'/></div>
+					</div>
+					<div class='para' style='margin:10px 50px 0px 50px'>
+					These images have a fill color and a stroke color with a transparent background. Now create a bundle javascript file as shown below.
+					</div>
+<pre class='code'>
+$(document).ready(function()	{
+
+	SVGUpInstance.init('samples-basic',
+		
+		{"icons": {
+			"cogs":{"url":"images/samples/cogs.svg"},
+			"pumpkin":{"url":"images/samples/pumpkin.svg"},
+			"bell":{"url":"images/samples/bell.svg"},
+			"fish":{"url":"images/samples/fish.svg"}
+		}
+		
+	});
+
+});
+</pre>
+
+					<div class='para' style='margin:10px 50px 0px 50px'>
+					This file makes a call to the SVGUpInstance with the mainfest for the images. The first parameter is the name given to the
+					bundle. The second parameter is a list of the images that are available in this bundle. Note that the images won't be loaded
+					until referred to in the HTML. Now place the following tag into your HTML for each image that you want to display.
+					</div>
+
+<pre class='code'>
+&lt;div svgup-icon='samples-basic.cogs' class='svgup-icon-wrapper'&gt;&lt;/div&gt;
+</pre>
+					<div class='para' style='margin:10px 50px 0px 50px'>
+					You can see that the image is named in the svgup-icon attribute of the div using the notation [bundle-name].[imagename]. When
+					the page loads the SVGUpInstance looks up all references to the images and loads them automatically. The resulting images are
+					displayed below.
+					</div>
+					<br><br>
+					<div>
+						<div svgup-icon='samples-basic.cogs' class='svgup-icon-wrapper'></div>
+						<div svgup-icon='samples-basic.pumpkin' class='svgup-icon-wrapper'></div>
+						<div svgup-icon='samples-basic.bell' class='svgup-icon-wrapper'></div>
+						<div svgup-icon='samples-basic.fish' class='svgup-icon-wrapper'></div>
+					</div>
+		
+					<br><br>
+					<div class='page-title-sub'>Create a basic bundle class</div>
+
+					<div class='para' style='margin:10px 50px 0px 50px'>
+					Now we'll build on the basic example to include some image classes. In the modified bundle below you'll see that we've
+					created two new classes, 'grey-green' and 'white-green'.
+					</div>
+
+<pre class='code'>
+$(document).ready(function()	{
+
+	SVGUpInstance.init('samples-classes',
+		
+		{"icons": {
+			"cogs":{"url":"images/samples/cogs.svg"},
+			"pumpkin":{"url":"images/samples/pumpkin.svg"},
+			"bell":{"url":"images/samples/bell.svg"},
+			"fish":{"url":"images/samples/fish.svg"},
+		},
+
+		"classes":{
+			"grey-red":{
+				"svgdefault":{"fillcolor":"#AAAAAA", "strokecolor":"#FFFFFF"}, 
+				"svghover":{"fillcolor":"#8CC63E", "strokecolor":"#000000"}, 
+				"cssdefault":{"opacity1":"0.5", "width":"60px", "height":"60px"},
+				"csshover":{"opacity":"1"}
+			},
+			"white-green":{
+				"svgdefault":{"fillcolor":"#FFFFFF", "strokecolor":"#8CC63E"}, 
+				"svghover":{"fillcolor":"#FF0000", "strokecolor":"#000000"}, 
+				"cssdefault":{"opacity1":"0.5", "width":"60px", "height":"60px"},
+				"csshover":{"opacity":"1"}
+			}
+		}}
+
+	);	
+
+});
+</pre>
+			
+			<div class='para' style='margin:10px 50px 0px 50px'>
+			The two classes each have svgdefault &amp; svghover values which specify colors for the fill and stroke within the image. Now we
+			add the svgup-class attribute to the image div to indicate which class to use.
+			</div>
+<pre class='code'>
+&lt;div svgup-icon='samples-basic.cogs' svgup-class='white-green' class='svgup-icon-wrapper'&gt;&lt;/div&gt;
+</pre>
+
+					<div>
+						<div svgup-icon='samples-classes.cogs' svgup-class='white-green' class='svgup-icon-wrapper'></div>
+						<div svgup-icon='samples-classes.pumpkin' svgup-class='white-green' class='svgup-icon-wrapper'></div>
+						<div svgup-icon='samples-classes.bell' svgup-class='white-green' class='svgup-icon-wrapper'></div>
+						<div svgup-icon='samples-classes.fish' svgup-class='white-green' class='svgup-icon-wrapper'></div>
+					</div>
+					<div>
+						<input id='btnSwitchClass1' type='button' value='white-green'/>
+						<input id='btnSwitchClass2' type='button' value='grey-red'/>
+					</div>
+
+			<div class='para' style='margin:10px 50px 0px 50px'>
+			Now the SVG images are modified to the initial white-green class specified by the svgdefalult value. Hover over the images to see how the  svghover value affects the SVGs. Use the grey-red button above to change the class for the icons in the bundle.
+			</div>
+					
+			<div class='para' style='margin:10px 50px 0px 50px'>
+			Use the Show Bundles link at the top of the left menu to preview these bundles at any time.
+			</div>
+					<br><br>
+					<div class='page-title-sub'>Working with Layers</div>
+					
+					<div class='para' style='margin:10px 50px 0px 50px'>
+					One of the great features of SVG images is that they can contain different layers which exist and operate
+					independently of one another. In this example we have three images each of which has two layers. The first
+					layer contains the green disc with the black border. The second layer is the icon itself
+					</div>
+				<br><br>
+					<div>
+						<div style='display:inline-block'><img style='width:50px' src='./images/basic-layers/1.svg'/></div>
+						<div style='display:inline-block'><img style='width:50px' src='./images/basic-layers/a.svg'/></div>
+						<div style='display:inline-block'><img style='width:50px' src='./images/basic-layers/cog.svg'/></div>
+					</div>
+					
+					<div class='para' style='margin:10px 50px 0px 50px'>
+					Now we can create the bundle file for these images as follows
+					</div>
+					
+<pre class='code'>
+"classes":{
+	"green-white":{
+		"cssdefault":{"opacity1":"0.5", "width":"120px", "height":"120px", "transition":"all 0.5s"},
+		"layers":[
+			{"id":"Layer1", "style":{
+				"svgdefault":{"fillcolor":"#AAAAAA", "strokecolor":"#666666"},
+				"svghover":{"fillcolor":"#8CC63E", "strokecolor":"#8CC63E"}, 
+			}},
+			{"id":"Layer2", "style":{
+				"svgdefault":{"fillcolor":"#FFFFFF", "strokecolor":"#EEEEEE"},
+				"svghover":{"fillcolor":"#666666", "strokecolor":"#0000000"}, 
+			}}
+		]
+	}
+}}
+</pre>
+					<div class='para' style='margin:10px 50px 0px 50px'>
+					Note that the 'green-white' class now has a layers element which identifies each layer by id and handles
+					the fill and stroke values independently.
+					</div>
+
+					<div style='margin:40px'>
+						<div svgup-icon='samples-layers-basic.1' svgup-class='green-white' class='svgup-icon-wrapper'></div>
+						<div svgup-icon='samples-layers-basic.a' svgup-class='green-white' class='svgup-icon-wrapper'></div>
+						<div svgup-icon='samples-layers-basic.cog' svgup-class='green-white' class='svgup-icon-wrapper'></div>
+					</div>
+					
+					<div class='para' style='margin:10px 50px 0px 50px'>
+					When you hover over the images you can see that each layer is styled independently.
+					</div>
+					<br><br>
+					<div class='page-title-sub'>Rotating Layers</div>
+					
+					<div class='para' style='margin:10px 50px 0px 50px'>
+					SVG Up allows you to rotate layers independently of each other, helping to create some nice animation effects.
+					The following class shows a rotate value for the icon element of the images.
+					</div>
+<pre class='code'>
+"classes":{
+	"white-black-rotate":{
+		"cssdefault":{"width":"120px", "height":"120px", "transition":"all 0.5s"},
+		"csshover":{"width":"60px", "height":"60px"	},
+		"layers":[
+			{"id":"Layer1", "style":{
+				"svgdefault":{"fillcolor":"#666666", "strokecolor":"#666666"},
+				"svghover":{"fillcolor":"#FFFFFF", "strokecolor":"#FFFFFF", 
+				"rotate":{"duration":0.5, "anticlockwise":true, "repeatCount":1}}, 
+			}},
+			{"id":"Layer2", "style":{
+				"svgdefault":{"fillcolor":"#FFFFFF", "strokecolor":"#EEEEEE"},
+				"svghover":{"fillcolor":"#333333", "strokecolor":"#FFFFFF"},
+			}}
+		]
+	}
+}}
+</pre>
+					<div class='para' style='margin:10px 50px 0px 50px'>
+					Note the duration value which indicates the time, in seconds, for how long an full rotation should take.
+					The anticlockwise value will cause the layer to rotate anticlockwise if set to true. The repeatCount value
+					indicates how many times to rotate the layer. This can be a decimal or 'indefinite' if it shouldn't stop.
+					</div>
+
+					<div style='margin:40px'>
+						<div svgup-icon='samples-layers-basic.1' svgup-class='white-black-rotate' class='svgup-icon-wrapper'></div>
+						<div svgup-icon='samples-layers-basic.a' svgup-class='white-black-rotate' class='svgup-icon-wrapper'></div>
+						<div svgup-icon='samples-layers-basic.cog' svgup-class='white-black-rotate' class='svgup-icon-wrapper'></div>
+					</div>
+
+				</center>
+			</div>
+		</div>
+		
+	</body>
+</HTML>
+<script>
+$(document).ready(function()	{
+	$('#btnSwitchClass1').bind('click', function()	{
+		switchClass('samples-classes', 'white-green');
+	});
+	$('#btnSwitchClass2').bind('click', function()	{
+		switchClass('samples-classes', 'grey-red');
+	});
+});
+
+function switchClass(bundleName, className)	{
+
+	var bundle = SVGUpInstance.getBundle(bundleName);
+	var classes = bundle.manifest.classes;
+	
+	var svgClass = bundle.getClass(className);
+	bundle.setStyle(svgClass);
+
+}
+</script>

@@ -1,0 +1,195 @@
+<HTML>
+
+	<head>	
+		<base href="../"/>
+		<link rel="stylesheet" type="text/css" href="inc/site.css" />	
+		<script type="text/javascript" src="lib/jquery.min.js"></script>
+		<script type="text/javascript" src="lib/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="inc/site.js"></script>
+		<script type="text/javascript" src="SVG-Up.js"></script>
+		<script type="text/javascript" src="images/site-bundle.js"></script>
+
+		<style>		
+		#LayerBalloon1{
+		
+			animation-name: snowfall;
+			animation-duration: 10s;
+			animation-iteration-count: infinite;
+			animation-timing-function: ease-in;
+			animation-delay: 2s;
+	
+			/*transform: translateY(0px);*/
+			animation1: popup 10s 6.5s ease infinite;
+
+		}
+		
+		</style>
+	</head>
+	
+	<body>
+	
+		<div style='display: table; height:100%; width:100%'>
+			<div style='width:250px; height:100%; display:table-cell'>
+				<div class='site-side-panel'></div>
+			</div>
+			<div style='display:table-cell; height: 100%; width:calc:(100% - 200px); text-align:center; vertical-align: top;'>
+				<div style='display: table; text-align:left; vertical-align: top; height1:100%; width:100%; padding-bottom:100px'>
+					<div style='display:table-cell; width:100%; height: 50px; background:#AAA'>
+						<div style='display:inline-block; padding:5px'>
+							<div>LayerSVG:</div>
+							<div><input id='txtLayerSVG' type='text' value='#8CC63F'/></div>
+							<div><input id='chkLayerSVG' type='checkbox' value='on' checked/> Visible</div>
+						</div>
+						<div style='display:inline-block; padding:5px'>
+							<div>LayerUP:</div>
+							<div><input id='txtLayerUP' type='text' value='#FFFFFF'/></div>
+							<div><input id='chkLayerUP' type='checkbox' checked/> Visible</div>
+						</div>
+						<div style='display:inline-block; padding:5px'>
+							<div>LayerBalloon:</div>
+							<div><input id='txtLayerBalloon' type='text' value='#8CC63F'/></div>
+							<div><input id='chkLayerBalloon' type='checkbox' checked/> Visible</div>
+						</div>
+					</div>
+				</div>
+				<center>
+					<div id='imgLogo' svgup-icon='logo' class='svgup-icon-wrapper' style='width:340px; height:240px'></div>
+				</center>
+			</div>
+		</div>		
+		
+	</body>
+	
+</HTML>
+<script>
+
+var svgUp;
+var defaultColor = '#666';
+var logoIcon;
+
+$(document).ready(function()	{
+
+	svgUp = new SVGUp();
+	loadSVGUpCache();
+	createEvents();
+	
+});
+
+function createEvents()	{
+
+	$('#txtLayerSVG').bind('change', changeColor);
+	$('#txtLayerUP').bind('change', changeColor);
+	$('#txtLayerBalloon').bind('change', changeColor);
+
+	$('#chkLayerSVG').bind('change', setVisibility);
+	$('#chkLayerUP').bind('change', setVisibility);
+	$('#chkLayerBalloon').bind('change', setVisibility);
+
+}
+
+function loadSVGUpCache()	{
+
+	svgUp.init(null,
+		
+		{
+			"icons":{"logo" : {"url":"images/svg-up-logo.svg", "layered":"true"}}
+		}, 
+		
+		function(bundlename)	{
+
+			logoIcon = svgUp.getIcon('imgLogo');
+			if ((logoIcon != null) && (bundlename == 'default'))	{
+				setIconEvents();
+			}
+			console.log('done:' + bundlename);
+		
+		}
+
+	);
+	
+	/*svgUp.getBundle().fetch(['logo'],
+		
+		function()	{
+
+			logoIcon = svgUp.getIcon('imgLogo');
+			//setIconEvents();
+
+		}
+		
+	);*/
+	
+}
+
+function setIconEvents()	{
+
+	logoIcon.getLayer('LayerBalloon').bind('click', function()	{
+		
+		floatOut($(this));
+		
+	});
+	
+}
+
+function floatOut(ele)	{
+
+	//alert(ele.)
+	ele.animate(
+		{"min-height": -30},
+		{duration: 2000,
+			step: function( top ){
+				this.setAttribute("transform", "translate(0," + top + ")");
+			},
+			complete: function()	{
+				floatIn(ele);
+			}
+		}, 2000);
+		
+}
+
+function floatIn(ele)	{
+
+	ele.get(0).setAttribute("transform", "translate(0, 0)");
+	ele.animate(
+		{"min-height": -30},
+		{duration: 2000,
+			step: function( top ){
+				this.setAttribute("transform", "translate(0," + (top + 30) + ")");
+			},			
+			complete: function()	{
+			}
+		}, 2000);
+		
+	
+}
+
+function changeColor()	{
+
+	logoIcon.setLayerAttribute('LayerSVG', 'path', 'fill', $('#txtLayerSVG').val());
+	logoIcon.setLayerAttribute('LayerUP', 'path', 'fill', $('#txtLayerUP').val());
+	logoIcon.setLayerAttribute('LayerBalloon', 'path', 'fill', $('#txtLayerBalloon').val());
+
+}
+
+function setVisibility(evt)	{
+
+	var chkName = evt.currentTarget.id;
+	var layerName = chkName.substring(3, chkName.length);
+
+	if ( ! $('#' + chkName).is(':checked'))	{
+		logoIcon.getLayer(layerName).css('opacity', 0);
+	} else {
+		logoIcon.getLayer(layerName).css('opacity', 1);
+	}
+	
+}
+
+function setLayer()	{
+
+}
+
+$('#btnChangeColor').bind('click', function()	{
+	
+	changeColor($('#txtChangeColor').val());
+	
+});
+</script>

@@ -1,0 +1,74 @@
+<HTML>
+
+	<head>	
+		<base href="../"/>
+		<link rel="stylesheet" type="text/css" href="inc/site.css" />	
+		<script type="text/javascript" src="lib/jquery.min.js"></script>
+		<script type="text/javascript" src="lib/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="inc/site.js"></script>
+		<script type="text/javascript" src="SVG-Up.js"></script>
+		<script type="text/javascript" src="images/site-bundle.js"></script>
+		<script type="text/javascript" src="images/samples/svgup-bundle.js"></script>
+	</head>
+	
+	<body>
+	
+		<div style='display: table; height:100%; width:100%'>
+			<div style='width:250px; height:100%; display:table-cell'>
+				<div class='site-side-panel'></div>
+			</div>
+			<div style='display:table-cell; height: 100%; width:calc:(100% - 200px); vertical-align:top'>
+				<div style='width:100%; background:#EEE; height1:100px;'>
+					<div style='padding:20px'>
+						<div style='display:inline-table'>
+							<div class='prompt' style='display:table-cell'>Styles:</div> 
+							<div class='prompt' style='padding-left:10px; display:table-cell'><select id='cmbStyles' class='input'></select></div>
+						</div>
+					</div>
+				</div>
+				<div style='padding:100px; text-align:center' id='divSamples'>
+					<div class='page-title page-title-sub'>Select a style from the list above and hover over the icons to see the effect</div>
+					<div svgup-icon='samples.cogs' svgup-class='grey-green' class='svgup-icon-wrapper'></div>
+					<div svgup-icon='samples.mail' svgup-class='grey-green' class='svgup-icon-wrapper'></div>
+					<div svgup-icon='samples.wrench' svgup-class='grey-green' class='svgup-icon-wrapper'></div>
+					<div svgup-icon='samples.lock' svgup-class='grey-green' class='svgup-icon-wrapper'></div>
+					<div svgup-icon='samples.speech' svgup-class='grey-green' class='svgup-icon-wrapper'></div>
+					<div svgup-icon='samples.music' svgup-class='grey-green' class='svgup-icon-wrapper'></div>
+					<div svgup-icon='samples.sun' svgup-class='grey-green' class='svgup-icon-wrapper'></div>
+					<div svgup-icon='samples.sunclouds' svgup-class='grey-green' class='svgup-icon-wrapper'></div>
+					<div svgup-icon='samples.hazard' svgup-class='grey-green' class='svgup-icon-wrapper'></div>
+					<div svgup-icon='samples.mouse' svgup-class='grey-green' class='svgup-icon-wrapper'></div>
+					<div svgup-icon='samples.delete' svgup-class='grey-green' class='svgup-icon-wrapper'></div>
+					<div svgup-icon='samples.butterfly' svgup-class='grey-green' class='svgup-icon-wrapper'></div>
+					<div svgup-icon='samples.pumpkin' svgup-class='grey-green' class='svgup-icon-wrapper'></div>
+					<div svgup-icon='samples.bell' svgup-class='grey-green' class='svgup-icon-wrapper'></div>
+					<div svgup-icon='samples.fish' svgup-class='grey-green' class='svgup-icon-wrapper'></div>
+				</div>
+			</div>
+		</div>		
+		
+	</body>
+
+</HTML>
+<script>
+$(document).ready(function()	{
+	
+	var cmbStyles = $('#cmbStyles');
+	
+	var bundle = SVGUpInstance.getBundle('samples');
+	var classes = bundle.manifest.classes;
+	
+	for (key in classes)	{
+		cmbStyles.append('<option>' + key + '</option>');
+	}
+	
+	cmbStyles.bind('change', function()	{
+
+		var styleName = $(this).val();
+		var svgClass = bundle.getClass(styleName);
+		bundle.setStyle(svgClass);
+		
+	});
+	
+});
+</script>

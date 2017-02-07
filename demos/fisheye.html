@@ -1,0 +1,87 @@
+<HTML>
+
+	<head>	
+		<base href="../"/>
+		<link rel="stylesheet" type="text/css" href="inc/site.css" />	
+		<script type="text/javascript" src="lib/jquery.min.js"></script>
+		<script type="text/javascript" src="lib/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="inc/site.js"></script>
+		<script type="text/javascript" src="SVG-Up.js"></script>
+		<script type="text/javascript" src="images/site-bundle.js"></script>
+		<script type="text/javascript" src="images/inforama-ui/svgup-bundle.js"></script>
+		<style>
+		.svgup-image-container	{
+			display:table-cell; vertical-align: bottom;
+		}
+		</style>
+	</head>
+	
+	<body>
+	
+		<!--div>Logos</div>
+		<br><br>
+		<div id='imgLogo' svgup-icon='inforamaui.logo' svgup-class='mainstyle' class='svgup-icon-wrapper' style='width:40px; height:40px'></div>
+		<div id='downArrow' svgup-icon='inforamaui.downarrow' svgup-class='mainstyle' class='svgup-icon-wrapper' style='width:40px; height:40px'></div>
+		<div id='userLogo' svgup-icon='inforamaui.usericon' svgup-class='mainstyle' class='svgup-icon-wrapper' style='width:40px; height:40px'></div>
+		
+		<br><br>
+		<input type='text' id='txtChangeColor' value='#FF0000'/>
+		<input type='button' id='btnChangeColor' value='Change Color'/>
+		<input type='button' id='btnPreview' value='Preview'/-->
+		
+		<div style='display: table; height:100%; width:100%'>
+			<div class='site-side-panel'></div>
+			<div style='display:table-cell; width:calc:(100% - 200px); text-align:center; vertical-align: middle'>
+				<div style='width:310px; text-align:center;  border1:1px solid #0F0; display:inline-table'>
+					<div style='height: 80px; width:300px; border1:1px solid #F00; text-align:left; display:table'>
+						<div svgup-icon='inforamaui.add' svgup-class='fisheye' class='svgup-icon-fisheye'></div>
+						<div svgup-icon='inforamaui.date-picker' svgup-class='fisheye' class='svgup-icon-fisheye'></div>
+						<div svgup-icon='inforamaui.magnifier' svgup-class='fisheye' class='svgup-icon-fisheye'></div>
+						<div svgup-icon='inforamaui.remove-icon' svgup-class='fisheye' class='svgup-icon-fisheye'></div>
+						<div svgup-icon='inforamaui.tick' svgup-class='fisheye' class='svgup-icon-fisheye'></div>
+						<div svgup-icon='inforamaui.wait-icon' svgup-class='fisheye' class='svgup-icon-fisheye'></div>
+						<div svgup-icon='inforamaui.wait-icon-circles' svgup-class='fisheye' class='svgup-icon-fisheye'></div>
+						<div svgup-icon='inforamaui.warning-icon' svgup-class='fisheye' class='svgup-icon-fisheye'></div>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</body>
+
+</HTML>
+<script>
+
+//var svgUp;
+var defaultColor = '#666';
+
+$(document).ready(function()	{
+
+	//SVGUpInstance.getBundle('inforamaui').fetch(['logo', 'usericon']);
+	
+});
+
+function changeColor(color)	{
+
+	var icons = SVGUpInstance.getBundle('inforamaui').getIcons();
+	
+	for (var key in icons) {
+		var icon = icons[key];
+		icon.setAttribute('polyline', 'fill', color);
+		icon.setAttribute('path', 'fill', color);
+	}
+
+}
+
+$('#btnChangeColor').bind('click', function()	{
+	
+	changeColor($('#txtChangeColor').val());
+	
+});
+
+$('#btnPreview').bind('click', function()	{
+	
+	SVGUpInstance.preview()	;
+	
+});
+
+</script>

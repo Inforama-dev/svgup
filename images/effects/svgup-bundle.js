@@ -31,15 +31,15 @@ $(document).ready(function()	{
 				"svghover":{"fillcolor":"#8CC63E", "strokecolor":"#8CC63E"}, 
 				"layers":[
 					{"id":"Layer1", "style":{
-						"svghover":{"rotate":{"duration":7, "anticlockwise":true}, "strokecolor":"#8CC63E"},
+						"svghover":{"rotate":{"duration":7, "anticlockwise":true} },
 						"csshover":{"opacity":"0.2"},
 					}},
 					{"id":"Layer2", "style":{
-						"svghover":{"rotate":{"duration":4, "anticlockwise":false}, "strokecolor":"#8CC63E"},
+						"svghover":{"rotate":{"duration":4, "anticlockwise":false}},
 						"csshover":{"opacity":"0.5"},
 					}},
 					{"id":"Layer3", "style":{
-						"svghover":{"rotate":{"duration":1, "anticlockwise":true}, "strokecolor":"#8CC63E"},
+						"svghover":{"rotate":{"duration":1, "anticlockwise":true}},
 						"csshover":{"opacity":"0.9"},
 					}}
 				]

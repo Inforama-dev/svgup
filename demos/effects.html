@@ -17,27 +17,32 @@
 			<div style='width:250px; height:100%; display:table-cell'>
 				<div class='site-side-panel'></div>
 			</div>
-			<div style='display:table-cell; height: 100%; width:calc:(100% - 200px); text-align:center; vertical-align: middle'>
-				<center>
-				<div style='width:500px; border-top:1px solid #AAA'>
+			<BR><BR>
+			<div style='display1:table-cell; height: 100%; width:calc:(100% - 200px); text-align:center; vertical-align: middle'>
+				<div class='effect-panel' id='divEffectCodeCogs'>
 					<div svgup-icon='effects.cogs' svgup-class='cogs' class='svgup-icon-wrapper-large'></div>
+					<div class='effect-code'></div>
 				</div>
-				<div style='width:500px; border-top:1px solid #AAA'>
+				<div class='effect-panel'>
 					<div svgup-icon='effects.circles' svgup-class='circles' class='svgup-icon-wrapper-large'></div>
+					<div class='effect-code'></div>
 				</div>
-				<div style='width:500px; border-top:1px solid #AAA'>
+				<div class='effect-panel'>
 					<div svgup-icon='effects.clock' svgup-class='clock' class='svgup-icon-wrapper-large'></div>
+					<div class='effect-code'></div>
 				</div>
-				<div style='width:500px; border-top:1px solid #AAA'>
+				<div class='effect-panel'>
 					<div svgup-icon='effects.arrows' svgup-class='arrows' class='svgup-icon-wrapper-large'></div>
+					<div class='effect-code'></div>
 				</div>
-				<div style='width:500px; border-top:1px solid #AAA'>
+				<div class='effect-panel'>
 					<div svgup-icon='effects.twodots' svgup-class='twodots' class='svgup-icon-wrapper-large'></div>
+					<div class='effect-code'></div>
 				</div>
-				<div style='width:500px; border-top:1px solid #AAA'>
+				<div class='effect-panel'>
 					<div svgup-icon='effects.circles2' svgup-class='twodots' class='svgup-icon-wrapper-large'></div>
+					<div class='effect-code'></div>
 				</div>
-				</center>
 			</div>
 		</div>		
 		
@@ -45,38 +50,17 @@
 
 </HTML>
 <script>
-
-//var svgUp;
-var defaultColor = '#666';
-
 $(document).ready(function()	{
 
-	//SVGUpInstance.getBundle('inforamaui').fetch(['logo', 'usericon']);
+	$('.effect-panel').bind('mouseenter', function()	{
+		var className = $(this).find('.svgup-icon-wrapper-large').attr('svgup-class');
+		var classObj = SVGUpInstance.getBundle('effects').manifest.classes[className];
+		$(this).find('.effect-code').html(JSON.stringify(classObj));
+	});
+	
+	$('.effect-panel').bind('mouseleave', function()	{
+		$(this).find('.effect-code').html('');
+	});
 	
 });
-
-function changeColor(color)	{
-
-	var icons = SVGUpInstance.getBundle('inforamaui').getIcons();
-	
-	for (var key in icons) {
-		var icon = icons[key];
-		icon.setAttribute('polyline', 'fill', color);
-		icon.setAttribute('path', 'fill', color);
-	}
-
-}
-
-$('#btnChangeColor').bind('click', function()	{
-	
-	changeColor($('#txtChangeColor').val());
-	
-});
-
-$('#btnPreview').bind('click', function()	{
-	
-	SVGUpInstance.preview()	;
-	
-});
-
 </script>

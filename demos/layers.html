@@ -33,8 +33,8 @@
 				<div class='site-side-panel'></div>
 			</div>
 			<div style='display:table-cell; height: 100%; width:calc:(100% - 200px); text-align:center; vertical-align: top;'>
-				<div style='display: table; text-align:left; vertical-align: top; height1:100%; width:100%; padding-bottom:100px'>
-					<div style='display:table-cell; width:100%; height: 50px; background:#AAA'>
+				<div style='width:100%; background:#EEE; height1:100px; text-align:left; padding-left:20px'>
+					<div style='display:table-cell; width:100%; height: 50px'>
 						<div style='display:inline-block; padding:5px'>
 							<div>LayerSVG:</div>
 							<div><input id='txtLayerSVG' type='text' value='#8CC63F'/></div>
@@ -50,8 +50,12 @@
 							<div><input id='txtLayerBalloon' type='text' value='#8CC63F'/></div>
 							<div><input id='chkLayerBalloon' type='checkbox' checked/> Visible</div>
 						</div>
+						<div style='display:inline-block; padding:5px; vertical-align:top; margin-top:16px'>
+							<div><input id='btnFloat' type='button' value='Float'/></div>
+						</div>
 					</div>
 				</div>
+				<br><br><br>
 				<center>
 					<div id='imgLogo' svgup-icon='logo' class='svgup-icon-wrapper' style='width:340px; height:240px'></div>
 				</center>
@@ -84,6 +88,10 @@ function createEvents()	{
 	$('#chkLayerSVG').bind('change', setVisibility);
 	$('#chkLayerUP').bind('change', setVisibility);
 	$('#chkLayerBalloon').bind('change', setVisibility);
+	
+	$('#btnFloat').bind('click', function()	{
+		floatOut(logoIcon.getLayer('LayerBalloon'));
+	});
 
 }
 
@@ -132,7 +140,6 @@ function setIconEvents()	{
 
 function floatOut(ele)	{
 
-	//alert(ele.)
 	ele.animate(
 		{"min-height": -30},
 		{duration: 2000,

@@ -501,14 +501,22 @@ function SVGUPIcon(anchor, params)	{
 		inforamaSVGStyler.applyStyle(this, params.class.cssdefault, params.class.svgdefault);
 
 		if (params.class.csshover != null)	{
-			content.bind('mouseenter', function()	{						
-				inforamaSVGStyler.applyStyle(wrapper, params.class.csshover, params.class.svghover);
+			content.bind('mouseenter', function(evt)	{						
+				wrapper.doMouseEnter();
 			});
 			content.bind('mouseleave', function()	{						
-				inforamaSVGStyler.applyStyle(wrapper, params.class.cssdefault, params.class.svgdefault);
+				wrapper.doMouseLeave();
 			});
 		}
 		
+	}
+	
+	this.doMouseEnter = function(evt)	{
+		inforamaSVGStyler.applyStyle(wrapper, params.class.csshover, params.class.svghover);
+	}
+	
+	this.doMouseLeave = function(evt)	{
+		inforamaSVGStyler.applyStyle(wrapper, params.class.cssdefault, params.class.svgdefault);
 	}
 	
 	this.isRendered = function()	{
@@ -627,18 +635,26 @@ function InforamaSVGLayerIcon(icon)	{
 
 		}
 		
-		this.icon.getContent().bind('mouseenter', function()	{
+		this.icon.getContent().bind('mouseenter', function(evt)	{
+			wrapper.doMouseEnter();
+		});
+		
+		this.icon.getContent().bind('mouseleave', function()	{
+			wrapper.doMouseLeave();
+		});
 
+		this.doMouseEnter = function(evt)	{
+			
 			for (var i = 0; i < wrapper.icon.params.class.layers.length; i++)	{
 				
 				var layer = wrapper.icon.params.class.layers[i];
 				inforamaSVGStyler.applyLayerStyle(wrapper, layer, layer.style.csshover, layer.style.svghover);
 				
 			}
-
-		});
+			
+		}
 		
-		this.icon.getContent().bind('mouseleave', function()	{
+		this.doMouseLeave = function(evt)	{
 
 			for (var i = 0; i < wrapper.icon.params.class.layers.length; i++)	{
 				
@@ -648,9 +664,9 @@ function InforamaSVGLayerIcon(icon)	{
 			}
 			
 			wrapper.icon.removeHoverEffects();
-			
-		});
 
+		}
+		
 	}
 	
 	this.getSVGImage = function()	{
@@ -663,6 +679,10 @@ function InforamaSVGLayerIcon(icon)	{
 	
 	this.addHoverEffect = function(effect)	{
 		this.icon.addHoverEffect(effect);
+	}
+	
+	this.getContent = function()	{
+		return this.icon.getContent();
 	}
 	
 	this.registerStyles();
@@ -684,10 +704,14 @@ function InforamaSVGStyler()	{
 			if (svgstyle.fillcolor != null)	{
 				icon.setAttribute('path', 'fill', svgstyle.fillcolor);
 				icon.setAttribute('polygon', 'fill', svgstyle.fillcolor);
+				icon.setAttribute('circle', 'fill', svgstyle.fillcolor);
+				icon.setAttribute('rect', 'fill', svgstyle.fillcolor);
 			}
 			if (svgstyle.strokecolor != null)	{
 				icon.setAttribute('path', 'stroke', svgstyle.strokecolor);
 				icon.setAttribute('polygon', 'stroke', svgstyle.strokecolor);
+				icon.setAttribute('circle', 'stroke', svgstyle.strokecolor);
+				icon.setAttribute('rect', 'stroke', svgstyle.strokecolor);
 			}
 
 		}
@@ -702,10 +726,14 @@ function InforamaSVGStyler()	{
 
 			if (svgstyle.fillcolor != null)	{
 				layer.find('path').attr('fill', svgstyle.fillcolor);
+				layer.find('circle').attr('fill', svgstyle.fillcolor);
+				layer.find('rect').attr('fill', svgstyle.fillcolor);
 			}
 
 			if (svgstyle.strokecolor != null)	{
 				layer.find('path').attr('stroke', svgstyle.strokecolor);				
+				layer.find('circle').attr('stroke', svgstyle.strokecolor);				
+				layer.find('rect').attr('stroke', svgstyle.strokecolor);				
 			}
 
 			if (svgstyle.rotate != null)	{

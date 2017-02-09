@@ -77,6 +77,11 @@ body div	{
 	text-align:left; width:400px; border-bottom1:1px solid #AAA; display:inline-block; margin:20px; padding:20px;
 }
 
+.dialog-parent	{
+	text-align:left; z-index:10000; font-family:arial; font-size:14px; background:#FFF; border:3px solid #333; width:80%; height:80%; position:absolute; top:50px; left:50px;
+	-webkit-border-radius: 4px; border-radius: 4px; -moz-border-radius: 4px;
+}
+
 svg	* {
 	transition: all 0.5s;
 }

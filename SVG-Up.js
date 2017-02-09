@@ -142,12 +142,12 @@ function SVGUp()	{
 	
 	this.preview = function()	{
 		
-		var dialog = $('<div style="text-align:left; z-index:10000; font-family:arial; font-size:14px; background:#FFF; border:1px solid #333; width:100%; height:100%; position:absolute; top:0px; margin1:5px"><div>');
-		var table = $('<div style="display:inline-table; width:100%; height:100%"></div>');
+		var dialog = $('<div class="dialog-parent"><div>');
+		var table = $('<div style="display:inline-table; width:98%; height:90%"></div>');
 		var divBundles = $('<div style="vertical-align:top; display:table-cell; width:200px; height: 95%; background:#8cc63e; padding:10px"></div>');
 		var divPreview = $('<div style="vertical-align:top; display:table-cell; width:calc(100% - 200px); height: 95%; padding1:10px"></div>');
 		var divPreviewTitle = $('<div style="vertical-align:top; width:100%; height: 60px; padding:5px; background:#EEE"></div>');
-		var divPreviewIcons = $('<div style="vertical-align:top; width:100%; height: 90%; padding:5px; background:#FFF; overflow:auto"></div>');
+		var divPreviewIcons = $('<div style="vertical-align:top; width:100%; height: 80%; padding:5px; background:#FFF; overflow:auto"></div>');
 		divPreview.append(divPreviewTitle)
 		divPreview.append(divPreviewIcons)
 		
@@ -155,6 +155,9 @@ function SVGUp()	{
 		divBundles.append('<div style="font-size:20px; color:#FFF; margin-bottom:10px">Loaded Bundles</div>');
 		table.append(divBundles);
 		table.append(divPreview);
+		
+		var dlgFooter = $('<div style="border-top:#666; background:#EEE; height:10%"></div>');
+		dialog.append(dlgFooter);
 		
 		var titleContent = $(
 		"<div style='padding:20px'>" +
@@ -182,6 +185,7 @@ function SVGUp()	{
 			for (key in bundle.iconCache)	{
 				var content = bundle.iconCache[key].getContent();
 				var svg = content.find('svg');
+				
 				
 				content.height(svg.height());
 				content.width(svg.width());
@@ -237,11 +241,20 @@ function SVGUp()	{
 			
 		}
 
-		var btnClose = $('<input type=button value="Close"/>');
+		$(document).on("keyup", function(evt)	{
+		
+			if (evt.keyCode == 27)	{
+				evt.stopPropagation();
+				dialog.remove();
+			}
+
+		});
+
+		var btnClose = $('<input type="button" value="Close" style="width:200px; height:25px; margin:10px; float:right"/>');
 		btnClose.bind('click', function()		{
 			dialog.remove();
 		});
-		divBundles.append(btnClose)
+		dlgFooter.append(btnClose)
 		
 	}
 

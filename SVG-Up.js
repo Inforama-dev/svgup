@@ -824,7 +824,10 @@ function SVGStyleRotate(element, style)	{
 		rotateEle.setAttributeNS(null, "to", rotation + " " + cx + " " + cy);
 
 		element.get(0).appendChild(rotateEle);
-		rotateEle.beginElement();
+		
+		if ('beginElement' in rotateEle) {
+			rotateEle.beginElement();
+		}
 		
 	}
 	

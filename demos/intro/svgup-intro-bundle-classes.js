@@ -3,10 +3,10 @@ $(document).ready(function()	{
 	SVGUpInstance.init('samples-classes',
 		
 		{"icons": {
-			"cogs":{"url":"images/samples/cogs.svg"},
-			"pumpkin":{"url":"images/samples/pumpkin.svg"},
-			"bell":{"url":"images/samples/bell.svg"},
-			"fish":{"url":"images/samples/fish.svg"},
+			"cog":{"url":"images/basic/lnr-cog-64.svg"},
+			"dice":{"url":"images/basic/lnr-dice-64.svg"},
+			"paw":{"url":"images/basic/lnr-paw-64.svg"},
+			"rocket":{"url":"images/basic/lnr-rocket-64.svg"}
 		},
 
 		"classes":{

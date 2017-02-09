@@ -103,17 +103,19 @@ function SiteSidePanel()	{
 
 function SiteFooter()	{
 
-	var content = $("<div style='position1:absolute; text-align:center; padding:10px; top: 0px; width:100%; color:#AAA; background1:#FFFF00; border-top:1px solid #CCC'>footer</div>");
-	content.html('copyright &copy; Inforama Ltd. 2017, <a style="color:#AAA" href="www.inforama.com">www.inforama.com</a>')
+	var content = $("<div class='footer'>footer</div>");
+	content.html('copyright &copy; Inforama Ltd. 2017, <a style="color:#AAA" href="https://www.inforama.com">www.inforama.com</a>')
 
-	$(document.body).append(content);
+	content.css({'position':'absolute'});
+	
+	$('.maincontent').append(content);
 	
 	$(window).resize(function()	{
-		/*console.log($(window).height());
+		console.log($(window).height());
 		console.log($(window).scrollTop());
 		console.log($(document).height());
 		console.log($(document).scrollTop());
-		content.css('top', $(window).height() - 30);*/
+		content.css('top', $(window).height() - 40);
 	});
 	
 	$(window).resize();

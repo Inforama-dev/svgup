@@ -18,6 +18,10 @@ body div	{
 	font-size:26px;
 }
 
+.maincontent	{
+	display:table-cell; width1:calc:(100% - 200px); text-align:center; vertical-align: top
+}
+
 .para	{
 	font-size:16px; line-height:1.6;
 }
@@ -25,6 +29,10 @@ body div	{
 .code	{
 	max-width:calc(100% - 200px); background:#FFE; text-align:left; padding:20px;
 	border-top:1px solid #CCC; border-bottom:1px solid #CCC; overflow:auto;
+}
+
+.footer	{
+	max-width:calc(100% - 250px); text-align:center; padding:10px 0px 10px 0px; width:100%; color:#AAA; border-top:1px solid #CCC;
 }
 
 .section-title	{
@@ -59,6 +67,10 @@ body div	{
 
 .svgup-icon-fisheye	{
 	display:inline-block; width: 40px; height:30px; display:table-cell; vertical-align: bottom;
+}
+
+.svgup-icon-fisheye-vert	{
+	display1:inline-block; width: 30px; height:30px; display1:table-cell; vertical-align: bottom;
 }
 
 .effect-panel	{

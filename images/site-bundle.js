@@ -30,7 +30,7 @@ $(document).ready(function()	{
 						"cssdefault":{"opacity":"0"},
 						"csshover":{"opacity":"1"},
 						"svgdefault":{"fillcolor":"#FFF", "strokecolor":"#8CC63E"},
-						"svghover":{"fillcolor":"#FFF", "strokecolor":"#AAA"}, 
+						"svghover":{"fillcolor":"#FFF", "strokecolor":"#AAA", "rotate":{"duration":1.5, "repeatCount":0.25}}, 
 					}
 				}]
 			}

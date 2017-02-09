@@ -1,5 +1,9 @@
 var SVGUpInstance = new SVGUp();
 
+//if (window.location.protocol == 'file:')	{
+//	SVGUpInstance.setBaseLocation('https://testa.inforama.com/InforamaJS/svgup/');
+//}
+
 function SVGUp()	{
 	
 	var wrapper = this;
@@ -8,9 +12,15 @@ function SVGUp()	{
 	this.icons = new Object();
 	this.domDiscovered = false;
 	
+	//this.baseLocation;
+	
 	this.getIcons = function(bundle)	{
 		return wrapper.bundles[this.getBundleName(bundle)].getIcons();
 	}
+	
+	//this.setBaseLocation = function(loc)	{
+	//	this.baseLocation = loc;
+	//}
 	
 	this.getIcon = function(id, bundle)	{		
 		return wrapper.bundles[this.getBundleName(bundle)].getIcon(id);		
@@ -34,6 +44,7 @@ function SVGUp()	{
 		
 		if (bundle == null)	{
 			bundle = this.bundles[this.getBundleName(bundleName)] = new SVGUpBundle(bundleName);
+			//bundle.setBaseLocation(this.baseLocation);
 			this.addBundleListener(bundle);
 		}
 		
@@ -241,6 +252,7 @@ function SVGUpBundle(name)	{
 	this.name = name;
 	var wrapper = this;
 	
+	//this.baseLocation;
 	this.manifest;
 	
 	this.svgCache = new Object();
@@ -250,6 +262,10 @@ function SVGUpBundle(name)	{
 	this.updateListeners = new Array();
 	
 	this.imagesLoadedListeners = new Array();
+	
+	//this.setBaseLocation = function(loc)	{
+	//	this.baseLocation = loc;
+	//}
 	
 	this.addImagesLoadedListener = function(listener)	{
 		this.imagesLoadedListeners.push(listener);
@@ -324,6 +340,11 @@ function SVGUpBundle(name)	{
 			var key = (items == null) ? Object.keys(this.manifest.icons)[i] : items[i];
 			var item = (items == null) ? this.manifest.icons[key] : this.manifest.icons[key];
 			item.name = key;
+			
+			//if (this.baseLocation != null)	{
+			//	var temp = this.baseLocation + item.url;
+			//	item.url = temp;
+			//}
 
 			new InforamaFileFetcher(item, 
 

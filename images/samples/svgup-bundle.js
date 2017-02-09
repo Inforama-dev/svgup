@@ -44,6 +44,12 @@ $(document).ready(function()	{
 				"svghover":{"fillcolor":"#8CC63E"}, 
 				"cssdefault":{"opacity1":"0.5", "width":"50px", "height":"50px", "transition":"all 0.5s"},
 				"csshover":{"opacity":"1", "width":"60px", "height":"60px"}
+			},
+			"fisheye-vert":{
+				"svgdefault":{"fillcolor":"#FFFFFF"}, 
+				"svghover":{"fillcolor":"#8CC63E"}, 
+				"cssdefault":{"opacity":"0.5", "width":"50px", "height":"50px", "transition":"all 0.5s"},
+				"csshover":{"opacity":"1", "width":"80px", "height":"80px"}
 			}
 		}}
 

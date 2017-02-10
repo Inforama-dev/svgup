@@ -1,9 +1,5 @@
 var SVGUpInstance = new SVGUp();
 
-//if (window.location.protocol == 'file:')	{
-//	SVGUpInstance.setBaseLocation('https://testa.inforama.com/InforamaJS/svgup/');
-//}
-
 function SVGUp()	{
 	
 	var wrapper = this;
@@ -12,15 +8,9 @@ function SVGUp()	{
 	this.icons = new Object();
 	this.domDiscovered = false;
 	
-	//this.baseLocation;
-	
 	this.getIcons = function(bundle)	{
 		return wrapper.bundles[this.getBundleName(bundle)].getIcons();
 	}
-	
-	//this.setBaseLocation = function(loc)	{
-	//	this.baseLocation = loc;
-	//}
 	
 	this.getIcon = function(id, bundle)	{		
 		return wrapper.bundles[this.getBundleName(bundle)].getIcon(id);		
@@ -44,7 +34,6 @@ function SVGUp()	{
 		
 		if (bundle == null)	{
 			bundle = this.bundles[this.getBundleName(bundleName)] = new SVGUpBundle(bundleName);
-			//bundle.setBaseLocation(this.baseLocation);
 			this.addBundleListener(bundle);
 		}
 		
@@ -114,7 +103,7 @@ function SVGUp()	{
 		this.domDiscovered = true;
 		
 	}
-
+	
 	this.displayBundle = function(bundleName, icons, target, disableCallback)	{
 		
 		var iconNameArr = new Array();
@@ -128,10 +117,33 @@ function SVGUp()	{
 
 			if (wrapper.bundles[bundleName] != null)	{				
 				wrapper.bundles[bundleName].loadAutoImages(wrapper.icons[bundleName]);
+				wrapper.registerProxies();
 			}
 
 		}
 
+	}
+	
+	this.registerProxies = function(target)	{
+		
+		target = (target == null) ? $(document) : target;
+		
+		target.find('div[svgup-proxy]').each(function()	{
+			
+			var proxy = $(this).attr('svgup-proxy');
+			var iconDiv = $(this).find(proxy);
+			var bundleArr = iconDiv.attr('svgup-icon').split('.');
+
+			var bundleName = (bundleArr.length == 0) ? 'default' : bundleArr[0];
+
+			var icon = SVGUpInstance.getBundle(bundleName).getIcon(iconDiv.attr('id'));
+			if (icon != null)	{
+				icon.addProxy($(this));
+			}
+			
+		});
+		
+		
 	}
 	
 	this.addBundleListener(this.getBundle('default'));
@@ -278,10 +290,6 @@ function SVGUpBundle(name)	{
 	
 	this.baseUrl;
 	
-	//this.setBaseLocation = function(loc)	{
-	//	this.baseLocation = loc;
-	//}
-	
 	this.addImagesLoadedListener = function(listener)	{
 		this.imagesLoadedListeners.push(listener);
 	}
@@ -315,12 +323,9 @@ function SVGUpBundle(name)	{
 	}
 	
 	this.getIcon = function(id)	{
-		
 		return this.iconCache[id];
-		
 	}
 	
-
 	this.getCacheString = function()	{
 		return JSON.stringify(wrapper.svgCache);
 	}
@@ -462,7 +467,6 @@ function SVGUpBundle(name)	{
 		for (key in this.iconCache)	{
 			this.iconCache[key].params.class = style;
 			this.iconCache[key].registerStyles();
-			//inforamaSVGStyler.applyStyle(this.iconCache[key], style.cssdefault, style.svgdefault);
 		}
 		
 	}
@@ -535,6 +539,18 @@ function SVGUPIcon(anchor, params)	{
 			}
 
 		}
+		
+	}
+	
+	this.addProxy = function(proxy)	{
+		
+		proxy.bind('mouseenter', function(evt)	{
+			wrapper.doMouseEnter(evt);
+		});
+		
+		proxy.bind('mouseleave', function(evt)	{
+			wrapper.doMouseLeave(evt);
+		});
 		
 	}
 	
@@ -638,11 +654,6 @@ function InforamaSVGLayerIcon(icon)	{
 		layers[layerElements[i].id] = $(layerElements[i]);
 	}
 	
-	if (icon.params.svg == null)	{
-		console.log(1);
-	}
-	console.log('layers found: ' + icon.params.svg.data.length);
-	
 	this.getLayer = function(id)	{
 		return layers[id];
 	}
@@ -727,6 +738,18 @@ function InforamaSVGLayerIcon(icon)	{
 		return this.icon.getContent();
 	}
 	
+	this.addProxy = function(proxy)	{
+		
+		proxy.bind('mouseenter', function(evt)	{
+			wrapper.doMouseEnter(evt);
+		});
+		
+		proxy.bind('mouseleave', function(evt)	{
+			wrapper.doMouseLeave(evt);
+		});
+		
+	}
+		
 	this.registerStyles();
 
 }

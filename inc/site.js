@@ -43,7 +43,7 @@ function SiteSidePanel()	{
 		if (params.href != null)	{
 			aref.attr('href', params.href);
 		}
-		var link = $('<div class="side-link"></div>');
+		var link = $('<div class="side-link" svgup-proxy=".svg-icon"></div>');
 		var icon = $('<div class="svg-icon" svgup-icon="site.bullet" svgup-class="bullet" style="vertical-align:bottom; margin-right:10px; display:inline-block; width:20px; height:20px"></div>');
 		icon.attr('id', params.id);
 		var label = $('<div style="display:inline-block;">' + params.label + '</div>');
@@ -53,20 +53,6 @@ function SiteSidePanel()	{
 		aref.append(link);
 		anchor.append(aref);		
 		return aref;
-		
-	}
-	
-	this.registerBulletEvents = function()	{
-
-		$('.side-link').bind('mouseenter', function(evt)	{
-			var icon = SVGUpInstance.getBundle('site').getIcon($(this).find('.svg-icon').attr('id'));
-			icon.doMouseEnter();
-		});
-		
-		$('.side-link').bind('mouseleave', function(evt)	{
-			var icon = SVGUpInstance.getBundle('site').getIcon($(this).find('.svg-icon').attr('id'));
-			icon.doMouseLeave();
-		});
 		
 	}
 	
@@ -97,8 +83,6 @@ function SiteSidePanel()	{
 	
 	var lnkEffectsIndexer = this.addLink(content, {id:'side-link-10', label:'Indexer', href:'./indexer.html'});
 
-	this.registerBulletEvents();
-	
 }
 
 

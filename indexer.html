@@ -1,0 +1,97 @@
+<HTML>
+
+	<head>	
+		<base href="."/>
+		<link rel="stylesheet" type="text/css" href="inc/site.css" />	
+		<script type="text/javascript" src="lib/jquery.min.js"></script>
+		<script type="text/javascript" src="lib/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="inc/site.js"></script>
+		<script type="text/javascript" src="SVG-Up.js"></script>
+		<script type="text/javascript" src="images/site-bundle.js"></script>
+	</head>
+	<body>
+	
+		<div style='display: table; height:100%; width:100%'>
+			<div style='width:250px; height:100%; display:table-cell'>
+				<div class='site-side-panel'></div>
+			</div>
+			<div class='maincontent' style='vertical-align:middle'>
+				<center>
+				<table cellpadding='10'>
+					<tr>
+						<td>Bundle name:</td>
+						<td><input type='text' id='txtBundleName'/></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><input type="file" id="fileinput" multiple /></td>
+					</tr>
+					<tr>
+						<td>Status</td>
+						<td><div id='divStatus'/></td>
+					</tr>
+					<tr>
+						<td>Output:</td>
+						<td>
+							<input id='btnCopyOutput' onclick='javascript:copyOutput()' type='button' value='Copy Output'/>
+							<br><textarea id='txtOutput'></textarea>
+						</td>
+					</tr>
+				</table>
+
+<script type="text/javascript">
+	
+var iconOutput = new Object();
+
+function readMultipleFiles(evt) {
+	//Retrieve all the files from the FileList object
+
+	var files = evt.target.files;
+
+	var divStatus = $('#divStatus');
+
+	if (files) {
+
+		for (var i=0, f; f=files[i]; i++) {
+			var r = new FileReader();
+				r.onload = (function(f) {
+				return function(e) {
+					var contents = e.target.result;
+					var newItem = {'url':f.name};
+					var itemName = f.name.split('.')[0];
+					iconOutput[itemName] = (newItem);
+					/*alert( "Got the file.n" 
+						  +"name: " + f.name + "n"
+						  +"type: " + f.type + "n"
+						  +"size: " + f.size + " bytesn"
+						  + "starts with: " + contents.substr(1, contents.indexOf("n"))
+					);*/ 
+					divStatus.html("Got the file.n" 
+						  +"name: " + f.name + "n"
+						  +"type: " + f.type + "n"
+						  +"size: " + f.size + " bytesn"
+						  + "starts with: " + contents.substr(1, contents.indexOf("n")));
+				};
+			})(f);
+
+			r.readAsText(f);
+		}
+		
+		
+	} else {
+		  alert("Failed to load files"); 
+	}
+}
+
+document.getElementById('fileinput').addEventListener('change', readMultipleFiles, false);
+  
+function copyOutput()	{
+	$('#txtOutput').html(JSON.stringify(iconOutput));
+}
+</script>
+				</center>
+			</div>
+		</div>
+		
+	</body>
+</HTML>

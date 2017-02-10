@@ -276,6 +276,8 @@ function SVGUpBundle(name)	{
 	
 	this.imagesLoadedListeners = new Array();
 	
+	this.baseUrl;
+	
 	//this.setBaseLocation = function(loc)	{
 	//	this.baseLocation = loc;
 	//}
@@ -339,7 +341,13 @@ function SVGUpBundle(name)	{
 	}
 	
 	this.init = function(manifest)	{
+		
 		this.manifest = manifest;
+		
+		if (this.manifest.options != null)	{			
+			this.baseUrl = this.manifest.options.base;
+		}
+		
 	}
 
 	this.fetch = function(items, callback, disableCallback)	{
@@ -354,10 +362,10 @@ function SVGUpBundle(name)	{
 			var item = (items == null) ? this.manifest.icons[key] : this.manifest.icons[key];
 			item.name = key;
 			
-			//if (this.baseLocation != null)	{
-			//	var temp = this.baseLocation + item.url;
-			//	item.url = temp;
-			//}
+			if (this.baseUrl != null)	{
+				var temp = this.baseUrl + item.url;
+				item.url = temp;
+			}
 
 			new InforamaFileFetcher(item, 
 

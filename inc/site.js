@@ -95,7 +95,8 @@ function SiteSidePanel()	{
 		window.open('https://github.com/Inforama-dev/svgup/blob/master/license.txt');
 	});
 	
-	
+	var lnkEffectsIndexer = this.addLink(content, {id:'side-link-10', label:'Indexer', href:'./indexer.html'});
+
 	this.registerBulletEvents();
 	
 }
